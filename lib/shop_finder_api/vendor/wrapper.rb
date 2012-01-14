@@ -14,7 +14,8 @@ module ShopFinderApi
 
       # 基本定数
       SHOP_FINDER_URL = 'http://www.shoppingfinder.jp/product-search/xml'
-      SERVICE_ID      = 'RI,YA,YS,AJ,VA'
+      #SERVICE_ID      = 'RI,YA,YS,AJ,VA'
+      SERVICE_ID      = 'AJ,VA'
 
       class << self
 
@@ -76,7 +77,8 @@ module ShopFinderApi
         # @author Nozomu Kanechika
         # @since 0.0.1
         def xml_to_item_hash x
-          { :product_id  => "#{x.search("./Id")[0]["s"]}-#{x.search("./Code").text}",
+          #{ :product_id  => "#{x.search("./Id")[0]["s"]}-#{x.search("./Code").text}",
+          { :product_id  => x.search("./Id").text,
             :name        => x.search("./Name").text,
             :description => x.search("./Description").text,
             :price       => x.search("./Price").text,
