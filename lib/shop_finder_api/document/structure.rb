@@ -17,6 +17,7 @@ module ShopFinderApi
         field :code
         field :jan
         field :isbn
+        field :asin
         field :point
         field :url
 

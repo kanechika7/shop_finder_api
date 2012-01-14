@@ -86,6 +86,7 @@ module ShopFinderApi
             :code        => x.search("./Code").text,
             :jan         => x.search("./Jan").text,
             :isbn        => x.search("./Isbn").text,
+            :asin        => x.search("./Id").text, # 後で変更
             :point       => x.search("./Point").text,
             :url         => x.search("./Url").text,
             :images      => { :small  => x.search("./Image/Small").text,
