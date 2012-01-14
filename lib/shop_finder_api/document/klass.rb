@@ -23,7 +23,7 @@ module ShopFinderApi
         # プロダクトIDから検索 -> なければShopFinderから検索して作成
         # @aurhor Nozomu Kanechika
         # @since 0.0.1
-        def findy_by_product_id p_id
+        def find_by_product_id p_id
           item = where(product_id: p_id).first
           return item unless item.nil?
           item = ShopFinderApi::Vendor::Wrapper.find_by_product_id(p_id)

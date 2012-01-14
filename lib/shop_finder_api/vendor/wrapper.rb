@@ -13,7 +13,8 @@ module ShopFinderApi
     module Wrapper
 
       # 基本定数
-      SHOP_FINDER_URL = 'http://www.shoppingfinder.jp/product-search/xml'
+      SHOP_FINDER_SEARCH_URL  = 'http://www.shoppingfinder.jp/product-search/xml'
+      SHOP_FINDER_PRODUCT_URL = 'http://ln.shoppingfinder.jp/product-search/xml'
       #SERVICE_ID      = 'RI,YA,YS,AJ,VA'
       SERVICE_ID      = 'AJ,VA'
 
@@ -25,7 +26,7 @@ module ShopFinderApi
         def search keyword
           return '' if keyword.blank?
           # データ取得
-          xml = Nokogiri::XML(http_request('get',SHOP_FINDER_URL,{ keyword: keyword, serviceId: SERVICE_ID }).body)
+          xml = Nokogiri::XML(http_request('get',SHOP_FINDER_SEARCH_URL,{ keyword: keyword, serviceId: SERVICE_ID }).body)
           
           # hash 作成 { items: items, total_pages: total_pages, total_results: total_results }
           ## header 情報
@@ -44,7 +45,7 @@ module ShopFinderApi
         # @since 0.0.1
         def find_by_product_id p_id
           return nil if p_id.blank?
-          xml = Nokogiri::XML(http_request('get',SHOP_FINDER_URL,{ productId: p_id, serviceId: SERVICE_ID }).body)
+          xml = Nokogiri::XML(http_request('get',SHOP_FINDER_PRODUCT_URL,{ productId: p_id, serviceId: SERVICE_ID }).body)
 
           # hash 作成（Item の fields { product_id: ....,  } ）
           return xml_to_item_hash(xml.search("//Product"))
