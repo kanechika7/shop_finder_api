@@ -87,14 +87,14 @@ module ShopFinderApi
             :isbn        => x.search("./Isbn").text,
             :point       => x.search("./Point").text,
             :url         => x.search("./Url").text,
-            :image       => { :small  => x.search("./Image/Small"),
-                              :medium => x.search("./Image/Medium"),
-                              :large  => x.search("./Image/Large") },
-            :category    => { :id   => x.search("./Category/Id"),
-                              :name => x.search("./Category/Name") },
-            :store       => { :id   => x.search("./Store/Id"),
-                              :name => x.search("./Store/Name"),
-                              :url  => x.search("./Store/Url") },
+            :images      => { :small  => x.search("./Image/Small").text,
+                              :medium => x.search("./Image/Medium").text,
+                              :large  => x.search("./Image/Large").text },
+            :category    => { :id   => x.search("./Category/Id").text,
+                              :name => x.search("./Category/Name").text },
+            :store       => { :id   => x.search("./Store/Id").text,
+                              :name => x.search("./Store/Name").text,
+                              :url  => x.search("./Store/Url").text },
             :other       => {}  }
         end
 
