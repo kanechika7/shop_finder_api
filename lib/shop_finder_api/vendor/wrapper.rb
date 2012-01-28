@@ -23,10 +23,10 @@ module ShopFinderApi
         # 検索
         # @author Nozomu Kanechika
         # @since 0.0.1
-        def search keyword
+        def search keyword,service_ids=SERVICE_ID
           return '' if keyword.blank?
           # データ取得
-          xml = Nokogiri::XML(http_request('get',SHOP_FINDER_SEARCH_URL,{ keyword: keyword, serviceId: SERVICE_ID }).body)
+          xml = Nokogiri::XML(http_request('get',SHOP_FINDER_SEARCH_URL,{ keyword: keyword, serviceId: service_ids }).body)
           
           # hash 作成 { items: items, total_pages: total_pages, total_results: total_results }
           ## header 情報
