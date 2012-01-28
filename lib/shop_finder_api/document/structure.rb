@@ -11,6 +11,7 @@ module ShopFinderApi
 
         # fields
         field :product_id
+        field :service_id
         field :name
         field :description
         field :price

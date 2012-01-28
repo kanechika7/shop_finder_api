@@ -15,8 +15,8 @@ module ShopFinderApi
       # 基本定数
       SHOP_FINDER_SEARCH_URL  = 'http://www.shoppingfinder.jp/product-search/xml'
       SHOP_FINDER_PRODUCT_URL = 'http://ln.shoppingfinder.jp/product-search/xml'
-      #SERVICE_ID      = 'RI,YA,YS,AJ,VA'
-      SERVICE_ID      = 'AJ,VA'
+      SERVICE_ID      = 'RI,YA,YS,AJ,VA'
+      #SERVICE_ID      = 'AJ,VA'
 
       class << self
 
@@ -43,9 +43,9 @@ module ShopFinderApi
         # プロダクトIDから検索
         # @author Nozomu Kanechika
         # @since 0.0.1
-        def find_by_product_id p_id
+        def find_by_product_id p_id,s_id
           return nil if p_id.blank?
-          xml = Nokogiri::XML(http_request('get',SHOP_FINDER_PRODUCT_URL,{ productId: p_id, serviceId: SERVICE_ID }).body)
+          xml = Nokogiri::XML(http_request('get',SHOP_FINDER_PRODUCT_URL,{ productId: p_id, serviceId: s_id }).body)
 
           # hash 作成（Item の fields { product_id: ....,  } ）
           return xml_to_item_hash(xml.search("//Product"))
@@ -80,6 +80,7 @@ module ShopFinderApi
         def xml_to_item_hash x
           #{ :product_id  => "#{x.search("./Id")[0]["s"]}-#{x.search("./Code").text}",
           { :product_id  => x.search("./Id").text,
+            :service_id  => x.search("./Id")[0]["s"],
             :name        => x.search("./Name").text,
             :description => x.search("./Description").text,
             :price       => x.search("./Price").text,
